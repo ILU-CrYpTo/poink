@@ -1,17 +1,18 @@
 "use client"
+
 import type React from "react"
+
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Link as ScrollLink } from 'react-scroll'
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Features } from "../features"
-import { HowItWorks } from "../how-it-works"
-import { Footer } from "../footer"
+import { Features } from "./features"
+import { HowItWorks } from "./how-it-works"
+import { Footer } from "./footer"
 
 export default function Page() {
   const [email, setEmail] = useState("")
@@ -52,15 +53,12 @@ export default function Page() {
             <span className="font-semibold">POINK</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8">
-            <ScrollLink
-              to="how-it-works-section"
-              smooth={true}
-              duration={500}
-              offset={-80} // Adjust this value based on your header height
-              className="text-sm hover:text-gray-600 transition-colors cursor-pointer"
-            >
+            <Link href="/demo" className="text-sm hover:text-gray-600 transition-colors">
+              Demo
+            </Link>
+            <Link href="/how-it-works" className="text-sm hover:text-gray-600 transition-colors">
               How it Works
-            </ScrollLink>
+            </Link>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="https://x.com/poinkbot"
@@ -81,9 +79,7 @@ export default function Page() {
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button variant="default" className="bg-black text-white hover:bg-black/90 transition-colors">
-              <Link href="https://app-poinkbot.website/">
-              Launch App
-              </Link>
+                Get Access
               </Button>
             </motion.div>
           </nav>
@@ -115,6 +111,12 @@ export default function Page() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  variant="default"
+                  className="bg-black text-white hover:bg-black/90 transition-colors min-w-[140px]"
+                >
+                  Get Access
+                </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button variant="outline" className="min-w-[140px] transition-colors" asChild>
@@ -211,15 +213,37 @@ export default function Page() {
           </motion.div>
         </div>
       </main>
-      
       <Features />
-      
-      {/* Add id to HowItWorks section */}
-      <section id="how-it-works-section">
-        <HowItWorks />
+      <HowItWorks />
+      <section className="py-32 bg-gray-50">
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-medium mb-6">Stay Updated</h2>
+            <p className="text-gray-600 mb-8">Join our newsletter to get the latest updates and features.</p>
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="max-w-xs"
+                required
+              />
+              <Button type="submit" className="bg-black text-white hover:bg-black/90 transition-colors">
+                Subscribe
+              </Button>
+            </form>
+          </motion.div>
+        </div>
       </section>
-      
       <Footer />
     </div>
   )
 }
+
