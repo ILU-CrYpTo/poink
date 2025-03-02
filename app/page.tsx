@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Link as ScrollLink } from 'react-scroll'
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Features } from "../features"
 import { HowItWorks } from "../how-it-works"
 import { Footer } from "../footer"
@@ -24,6 +23,7 @@ export default function Page() {
     }
   }, [])
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Submitted email:", email)
